@@ -62,6 +62,7 @@ SignupPage({ Key? key }) : super(key: key);
                         color: Colors.grey.withOpacity(0.5))
                   ]),
               child: TextField(
+                controller: emailController,
                 decoration: InputDecoration(
                   hintText: "Email",
                     prefixIcon: const Icon(Icons.email, color: Colors.deepOrange,),
@@ -93,6 +94,7 @@ SignupPage({ Key? key }) : super(key: key);
                         color: Colors.grey.withOpacity(0.5))
                   ]),
               child: TextField(
+                controller: passwordController,
                 obscureText: true,
                 decoration: InputDecoration(
                   hintText: "Password",

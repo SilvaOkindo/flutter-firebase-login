@@ -1,10 +1,14 @@
+import 'package:firebase_login/auth_controller.dart';
 import 'package:firebase_login/signup_page.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({Key? key}) : super(key: key);
+  LoginPage({Key? key}) : super(key: key);
+
+  var emailController = TextEditingController();
+  var passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -52,6 +56,7 @@ class LoginPage extends StatelessWidget {
                               color: Colors.grey.withOpacity(0.5))
                         ]),
                     child: TextField(
+                      controller: emailController,
                       decoration: InputDecoration(
                           hintText: "Email",
                           prefixIcon: const Icon(Icons.email, color: Colors.deepOrange,),
@@ -85,6 +90,8 @@ class LoginPage extends StatelessWidget {
                               color: Colors.grey.withOpacity(0.5))
                         ]),
                     child: TextField(
+                      controller: passwordController,
+                      obscureText: true,
                       decoration: InputDecoration(
                           hintText: "Password",
                           prefixIcon: const Icon(Icons.password, color: Colors.deepOrange,),
@@ -120,22 +127,27 @@ class LoginPage extends StatelessWidget {
             const SizedBox(
               height: 70,
             ),
-            Container(
-              width: width * .5,
-              height: height * 0.08,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
-                image: const DecorationImage(
-                    image: AssetImage("img/loginbtn.png"), fit: BoxFit.cover),
+            GestureDetector(
+              onTap: () {
+                AuthController.instance.login(emailController.text.trim(), passwordController.text.trim());
+              },
+              child: Container(
+                width: width * .5,
+                height: height * 0.08,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30),
+                  image: const DecorationImage(
+                      image: AssetImage("img/loginbtn.png"), fit: BoxFit.cover),
+                ),
+                child: const Center(
+                    child: Text(
+                  "Sign in",
+                  style: TextStyle(
+                      fontSize: 36,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
+                )),
               ),
-              child: const Center(
-                  child: Text(
-                "Sign in",
-                style: TextStyle(
-                    fontSize: 36,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white),
-              )),
             ),
 
             SizedBox(height: width * 0.08,),
